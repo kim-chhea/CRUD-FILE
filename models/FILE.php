@@ -6,7 +6,8 @@ class File {
         $this->conn = $db;
     }
 
-    public function StoreFile($query, $params) {
+    public function StoreFile($query, $params) 
+    {
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->execute($params);
@@ -16,7 +17,8 @@ class File {
         }
     }
 
-    public function Show() {
+    public function Show()
+    {
         $query = " SELECT users.user_id, users.user_name, users.email, image.paths, image.file_name
         FROM users
         LEFT JOIN image ON users.user_id = image.user_id";
@@ -25,7 +27,8 @@ class File {
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
 
-    public function Checkimage($param){
+    public function Checkimage($param)
+    {
         $query = 'SELECT * FROM image WHERE file_name = ?';
         $stmt = $this->conn->prepare($query);
         $stmt->execute($param);
@@ -36,7 +39,8 @@ class File {
             return true; 
         }
     }
-    public function StoreUser($param){
+    public function StoreUser($param)
+    {
         $query = "INSERT INTO users (user_name, email) VALUES (?, ?)";
         $stmt = $this->conn->prepare($query);
         $stmt->execute($param);
